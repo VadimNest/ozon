@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <NuxtWelcome /> -->
-    <Map></Map>
+    <MapBlock />
   </div>
 </template>

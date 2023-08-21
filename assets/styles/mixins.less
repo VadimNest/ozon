@@ -1,0 +1,101 @@
+.img(@name) {
+  background-image: url('~assets/images/@{name}');
+}
+
+.contain() {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.cover {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.icon(@name) {
+  background-image: url('~assets/images/@{name}');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.focus(@params) {
+  &:focus-visible {
+    @params();
+  }
+}
+
+.active(@params) {
+  &:active {
+    @params();
+  }
+}
+
+.placeholder(@params) {
+  &::-webkit-input-placeholder {
+    @params();
+  }
+  &::-moz-placeholder {
+    @params();
+  }
+  &:-moz-placeholder {
+    @params();
+  }
+  &:-ms-input-placeholder {
+    @params();
+  }
+}
+
+.ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.square(@size) {
+  width: @size;
+  height: @size;
+}
+
+.no-scrollbar() {
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari and Opera
+  }
+}
+
+.hover(@params) {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @params();
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      @params();
+    }
+  }
+}
+
+.heading() {
+  color: @c-black;
+  text-align: center;
+  font-family: Kazimir;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+
+  @media @tablet {
+    font-size: 72px;
+  }
+
+  @media @hd {
+    font-size: 132px;
+  }
+}
