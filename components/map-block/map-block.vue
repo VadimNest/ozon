@@ -10,6 +10,7 @@
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <YandexMarker
+            @click="сlickMarker(point)"
             v-for="point in points"
             :key="`1-marker-${point.id}`"
             :coordinates="getCoords(point.coordinates)"
@@ -43,21 +44,25 @@ const props = defineProps({
 
 const runtimeConfig = useRuntimeConfig();
 
-const mapConfig = {
+const mapConfig = reactive({
   zoom: 12,
   coordinates: [45.043317, 41.96911],
-};
+});
 
 const settings = {
   apiKey: runtimeConfig.yandexAPI,
   lang: 'ru_RU',
-  coordorder: 'latlong', // Порядок задания географических координат
-  debug: false, // Режим отладки
+  coordorder: 'latlong',
+  debug: false,
   version: '2.1',
 };
 
 const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
+};
+
+const сlickMarker = (point) => {
+  mapConfig.coordinates = getCoords(point.coordinates);
 };
 </script>
 
