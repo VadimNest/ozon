@@ -1,10 +1,10 @@
 <template>
   <aside class="aside-block">
     <ul class="aside-block__list">
-      <li class="aside-block__item" v-for="item in 10" :key="item">
+      <li class="aside-block__item" v-for="point in points" :key="point.id">
         <h2 class="aside-block__title">Пункт Ozon</h2>
         <h3 class="aside-block__subtitle">
-          Россия, Ставрополь, Тюльпановая улица, 10к3
+          {{ point.address }}
         </h3>
         <button class="aside-block__controll">Самовывоз</button>
       </li>
@@ -12,6 +12,10 @@
   </aside>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  points: Array,
+});
+</script>
 
 <style lang="less" src="./aside-block.less" />

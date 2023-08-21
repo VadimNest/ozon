@@ -6,6 +6,8 @@
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 8px;
+    white-space: nowrap;
+    min-width: 174px;
   }
 
   &__description {
@@ -27,5 +29,71 @@
   }
 
   &__details {
+    padding: 30px;
+    width: 772px;
+  }
+
+  &__details-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 130%;
+    margin-bottom: 15px;
+  }
+
+  &__details-subtitle {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 130%;
+    margin-bottom: 25px;
+  }
+
+  &__details-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+  }
+
+  &__details-description {
+    font-size: 15px;
+    line-height: 140%;
+  }
+
+  &__details-label {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 140%;
+  }
+
+  &__images-wrapper {
+    padding-top: 25px;
+    overflow: auto;
+
+    scrollbar-color: #005bff #fafafa;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #005bff !important;
+      border-radius: 7px;
+    }
+  }
+
+  &__images-list {
+    display: flex;
+  }
+
+  &__image-item {
+    min-width: 217px;
+    width: 217px;
+    height: 171px;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

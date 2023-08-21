@@ -21,7 +21,7 @@
           >
             <template #component>
               <!-- v-model="name" -->
-              <CustomBalloon />
+              <CustomBalloon :point="point" />
             </template>
           </YandexMarker>
         </YandexClusterer>
@@ -33,11 +33,10 @@
 <script setup>
 import { YandexMap, YandexClusterer, YandexMarker } from 'vue-yandex-maps';
 
-onMounted(async () => {
-  points.value = await $fetch('http://localhost:3000/points');
+const props = defineProps({
+  points: Array,
 });
 
-let points = ref();
 const runtimeConfig = useRuntimeConfig();
 
 const mapConfig = {
