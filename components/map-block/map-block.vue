@@ -1,11 +1,12 @@
 <template>
-  <div class="map-block__wrapper">
+  <div class="map-block">
     <ClientOnly>
       <YandexMap
         class="map-block__content"
         :settings="settings"
         :zoom="mapConfig.zoom"
         :coordinates="mapConfig.coordinates"
+        :controls="[]"
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <YandexMarker
@@ -17,7 +18,12 @@
               iconLayout: 'default#image',
               iconImageHref: '/icons/marker.svg',
             }"
-          />
+          >
+            <template #component>
+              <!-- v-model="name" -->
+              <CustomBalloon />
+            </template>
+          </YandexMarker>
         </YandexClusterer>
       </YandexMap>
     </ClientOnly>

@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/styles/main.less'],
+  ssr: true,
   runtimeConfig: {
     public: {
       yandexAPI: process.env.YANDEX_API,
