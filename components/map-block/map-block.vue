@@ -17,6 +17,10 @@
             :options="{
               iconLayout: 'default#image',
               iconImageHref: '/icons/marker.svg',
+              hideIconOnBalloonOpen: false,
+              // iconColor: 'red',
+              // fillColor: 'red',
+              // fill: true,
             }"
           >
             <template #component>

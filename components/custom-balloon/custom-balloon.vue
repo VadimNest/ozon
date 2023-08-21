@@ -24,7 +24,7 @@
         class="custom-balloon__details-description"
         v-html="point.description"
       />
-      <!-- <span class="custom-balloon__details-label">До встречи на Ozon!</span> -->
+      <!-- custom-balloon__details-label -->
 
       <div class="custom-balloon__images-wrapper" v-if="point.images.length">
         <ul class="custom-balloon__images-list">
