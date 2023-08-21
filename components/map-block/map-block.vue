@@ -16,14 +16,16 @@
 <script setup>
 import { YandexMap, YandexMarker } from 'vue-yandex-maps';
 
-onMounted(async () => {});
+onMounted(async () => {
+  points.value = await $fetch('http://localhost:3000/points');
+});
 
+let points = ref();
 const runtimeConfig = useRuntimeConfig();
 
-// enterprise: false,
 const mapConfig = {
-  zoom: 13,
-  coordinates: [43.019857, 44.680068],
+  zoom: 12,
+  coordinates: [45.043317, 41.96911],
 };
 const settings = {
   apiKey: runtimeConfig.yandexAPI,
