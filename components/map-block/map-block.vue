@@ -18,10 +18,13 @@
             :key="`1-marker-${point.id}`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
-            :options="getOptions(point)"
+            :options="{
+              iconLayout: 'default#image',
+              hideIconOnBalloonOpen: false,
+              iconImageHref: getOptions(point),
+            }"
           >
             <template #component>
-              <!-- v-model="name" -->
               <CustomBalloon :point="point" />
             </template>
           </YandexMarker>
@@ -65,15 +68,12 @@ const сlickMarker = (point) => {
 };
 
 const getOptions = (point) => {
-  let icon = {
-    iconLayout: 'default#image',
-    iconImageHref:
-      point.id == activePoint.value
-        ? '/icons/active-marker.svg'
-        : '/icons/marker.svg',
-    hideIconOnBalloonOpen: false,
-  };
-  return icon;
+  let value =
+    point.id == activePoint.value
+      ? '/icons/active-marker.svg'
+      : '/icons/marker.svg';
+  console.log(value);
+  return value;
 };
 </script>
 
