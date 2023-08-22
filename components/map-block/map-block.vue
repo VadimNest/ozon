@@ -22,8 +22,8 @@
               hideIconOnBalloonOpen: false,
               iconImageHref: getOptions(point),
               cursor: 'pointer',
+              openBalloonOnClick: false,
             }"
-            :balloon-options="null"
           >
             <template #component>
               <CustomBalloon :point="point" />
