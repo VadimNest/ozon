@@ -8,13 +8,14 @@
         :coordinates="mapConfig.coordinates"
         :controls="[]"
       >
+        <!-- :key="`1-marker-${point.id}-${
+        point.id == activePoint ? 'active' : 'inactive'
+      }`" -->
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <YandexMarker
             @click="сlickMarker(point)"
             v-for="point in points"
-            :key="`1-marker-${point.id}-${
-              point.id == activePoint.value ? 'active' : 'inactive'
-            }`"
+            :key="`1-marker-${point.id}`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
             :options="getOptions(point)"
