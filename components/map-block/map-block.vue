@@ -12,7 +12,9 @@
           <YandexMarker
             @click="сlickMarker(point)"
             v-for="point in points"
-            :key="`1-marker-${point.id}`"
+            :key="`1-marker-${point.id}-${
+              point.id == activePoint.value ? 'active' : 'inactive'
+            }`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
             :options="getOptions(point)"
