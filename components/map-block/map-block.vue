@@ -9,8 +9,8 @@
         :controls="[]"
       >
         <!-- :key="`1-marker-${point.id}-${
-        point.id == activePoint ? 'active' : 'inactive'
-      }`" -->
+          point.id == activePoint ? 'active' : 'inactive'
+        }`" -->
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <YandexMarker
             @click="сlickMarker(point)"
@@ -22,6 +22,7 @@
               iconLayout: 'default#image',
               hideIconOnBalloonOpen: false,
               iconImageHref: getOptions(point),
+              cursor: 'pointer',
             }"
           >
             <template #component>
