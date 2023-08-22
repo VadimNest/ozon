@@ -8,14 +8,13 @@
         :coordinates="mapConfig.coordinates"
         :controls="[]"
       >
-        <!-- :key="`1-marker-${point.id}-${
-          point.id == activePoint ? 'active' : 'inactive'
-        }`" -->
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <YandexMarker
             @click="сlickMarker(point)"
             v-for="point in points"
-            :key="`1-marker-${point.id}`"
+            :key="`1-marker-${point.id}-${
+              point.id == activePoint ? 'active' : 'inactive'
+            }`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
             :options="{
@@ -24,6 +23,7 @@
               iconImageHref: getOptions(point),
               cursor: 'pointer',
             }"
+            :balloon-options="null"
           >
             <template #component>
               <CustomBalloon :point="point" />
@@ -73,7 +73,6 @@ const getOptions = (point) => {
     point.id == activePoint.value
       ? '/icons/active-marker.svg'
       : '/icons/marker.svg';
-  console.log(value);
   return value;
 };
 </script>
