@@ -15,14 +15,7 @@
             :key="`1-marker-${point.id}`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
-            :options="{
-              iconLayout: 'default#image',
-              iconImageHref: '/icons/marker.svg',
-              hideIconOnBalloonOpen: false,
-              // iconColor: 'red',
-              // fillColor: 'red',
-              // fill: true,
-            }"
+            :options="getOptions(point)"
           >
             <template #component>
               <!-- v-model="name" -->
@@ -49,6 +42,8 @@ const mapConfig = reactive({
   coordinates: [45.043317, 41.96911],
 });
 
+const activePoint = ref(0);
+
 const settings = {
   apiKey: runtimeConfig.yandexAPI,
   lang: 'ru_RU',
@@ -62,7 +57,20 @@ const getCoords = (coords) => {
 };
 
 const сlickMarker = (point) => {
+  activePoint.value = point.id;
   mapConfig.coordinates = getCoords(point.coordinates);
+};
+
+const getOptions = (point) => {
+  let icon = {
+    iconLayout: 'default#image',
+    iconImageHref:
+      point.id == activePoint.value
+        ? '/icons/active-marker.svg'
+        : '/icons/marker.svg',
+    hideIconOnBalloonOpen: false,
+  };
+  return icon;
 };
 </script>
 
