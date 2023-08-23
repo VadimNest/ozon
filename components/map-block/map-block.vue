@@ -21,6 +21,7 @@
               hideIconOnBalloonOpen: false,
               iconImageHref: '/icons/marker.svg',
               cursor: 'pointer',
+              openBalloonOnClick: false,
             }"
           >
             <template #component>
@@ -65,11 +66,13 @@ const clickMarker = (point) => {
     if (
       item.properties._data.markerId.includes(point.id) &&
       activePoint.value != point.id
-    )
+    ) {
       item.options.set({
         iconImageHref: '/icons/active-marker.svg',
       });
-    else
+
+      item.balloon.open();
+    } else
       item.options.set({
         iconImageHref: '/icons/marker.svg',
       });
