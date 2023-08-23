@@ -9,12 +9,13 @@
         :controls="[]"
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
+          <!-- :key="`1-marker-${point.id}-${
+              point.id == activePoint ? 'active' : 'inactive'
+            }`" -->
           <YandexMarker
             @click="сlickMarker(point)"
             v-for="point in points"
-            :key="`1-marker-${point.id}-${
-              point.id == activePoint ? 'active' : 'inactive'
-            }`"
+            :key="`1-marker-${point.id}`"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
             :options="{
@@ -22,7 +23,7 @@
               hideIconOnBalloonOpen: false,
               iconImageHref: getOptions(point),
               cursor: 'pointer',
-              openBalloonOnClick: false,
+              // openBalloonOnClick: false,
             }"
           >
             <template #component>
