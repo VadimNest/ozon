@@ -62,7 +62,10 @@ const getCoords = (coords) => {
 };
 const clickMarker = (point) => {
   marker.value.forEach((item) => {
-    if (item.properties._data.markerId.includes(point.id))
+    if (
+      item.properties._data.markerId.includes(point.id) &&
+      activePoint.value != point.id
+    )
       item.options.set({
         iconImageHref: '/icons/active-marker.svg',
       });
