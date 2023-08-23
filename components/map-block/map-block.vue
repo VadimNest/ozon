@@ -9,12 +9,9 @@
         :controls="[]"
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
-          <!-- :key="`1-marker-${point.id}-${
-            point.id == activePoint ? 'active' : 'inactive'
-          }`" -->
           <YandexMarker
-            @click="сlickMarker(point, i)"
-            v-for="(point, i) in points"
+            @click="clickMarker(point)"
+            v-for="point in points"
             :key="`1-marker-${point.id}`"
             ref="marker"
             :coordinates="getCoords(point.coordinates)"
@@ -22,9 +19,8 @@
             :options="{
               iconLayout: 'default#image',
               hideIconOnBalloonOpen: false,
-              iconImageHref: `/icons/marker.svg?marker-icon-id=${point.id}'`,
+              iconImageHref: '/icons/marker.svg',
               cursor: 'pointer',
-              // openBalloonOnClick: false,
             }"
           >
             <template #component>
@@ -64,36 +60,17 @@ const settings = {
 const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
-const сlickMarker = (point, i) => {
-  // console.log(marker.value[i]);
-
+const clickMarker = (point) => {
   let item = marker.value.find((item) =>
     item.properties._data.markerId.includes(point.id)
   );
-  // console.log(point.id);
-  item.properties._data.markerId;
 
-  // console.log(item.options._options);
-  console.log(
-    item.options.set({
-      iconImageHref: '/icons/active-marker.svg',
-    })
-  );
-
-  // setTimeout(() => {
-  //   item.options._options.iconImageHref = '/icons/active-marker.svg';
-  // }, 1000);
-  // marker.value[i].options._options.iconImageHref = '/icons/active-marker.svg';
+  item.options.set({
+    iconImageHref: '/icons/active-marker.svg',
+  });
 
   activePoint.value = point.id;
   store.a_setCoords(getCoords(point.coordinates));
-};
-const getOptions = (point) => {
-  let value =
-    point.id == activePoint.value
-      ? '/icons/active-marker.svg'
-      : '/icons/marker.svg';
-  return value;
 };
 </script>
 
