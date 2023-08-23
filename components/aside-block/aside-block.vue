@@ -18,9 +18,19 @@
 </template>
 
 <script setup>
+import { useMapStore } from '@/store/map';
+const store = useMapStore();
+
 const props = defineProps({
   points: Array,
 });
+
+const getCoords = (coords) => {
+  return [coords.latitude, coords.longitude];
+};
+const сlickMarker = (point) => {
+  store.a_setCoords(getCoords(point.coordinates));
+};
 </script>
 
 <style lang="less" src="./aside-block.less" />

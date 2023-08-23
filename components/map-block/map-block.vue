@@ -38,20 +38,17 @@
 
 <script setup>
 import { YandexMap, YandexClusterer, YandexMarker } from 'vue-yandex-maps';
+import { useMapStore } from '@/store/map';
+const store = useMapStore();
+const runtimeConfig = useRuntimeConfig();
 
 const props = defineProps({
   points: Array,
 });
 
-const runtimeConfig = useRuntimeConfig();
-
-const mapConfig = reactive({
-  zoom: 12,
-  coordinates: [45.043317, 41.96911],
-});
+let mapConfig = computed(() => store.g_getMapConfig);
 
 const activePoint = ref(0);
-
 const settings = {
   apiKey: runtimeConfig.yandexAPI,
   lang: 'ru_RU',
@@ -63,12 +60,10 @@ const settings = {
 const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
-
 const сlickMarker = (point) => {
   activePoint.value = point.id;
-  mapConfig.coordinates = getCoords(point.coordinates);
+  store.a_setCoords(getCoords(point.coordinates));
 };
-
 const getOptions = (point) => {
   let value =
     point.id == activePoint.value
