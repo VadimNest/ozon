@@ -10,18 +10,19 @@
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
           <!-- :key="`1-marker-${point.id}-${
-              point.id == activePoint ? 'active' : 'inactive'
-            }`" -->
+            point.id == activePoint ? 'active' : 'inactive'
+          }`" -->
           <YandexMarker
-            @click="сlickMarker(point)"
-            v-for="point in points"
+            @click="сlickMarker(point, i)"
+            v-for="(point, i) in points"
             :key="`1-marker-${point.id}`"
+            ref="marker"
             :coordinates="getCoords(point.coordinates)"
             :marker-id="`1-marker-${point.id}`"
             :options="{
               iconLayout: 'default#image',
               hideIconOnBalloonOpen: false,
-              iconImageHref: getOptions(point),
+              iconImageHref: `/icons/marker.svg?marker-icon-id=${point.id}'`,
               cursor: 'pointer',
               // openBalloonOnClick: false,
             }"
@@ -49,6 +50,9 @@ const props = defineProps({
 let mapConfig = computed(() => store.g_getMapConfig);
 
 const activePoint = ref(0);
+
+const marker = ref(null);
+
 const settings = {
   apiKey: runtimeConfig.yandexAPI,
   lang: 'ru_RU',
@@ -60,7 +64,27 @@ const settings = {
 const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
-const сlickMarker = (point) => {
+const сlickMarker = (point, i) => {
+  // console.log(marker.value[i]);
+
+  let item = marker.value.find((item) =>
+    item.properties._data.markerId.includes(point.id)
+  );
+  // console.log(point.id);
+  item.properties._data.markerId;
+
+  // console.log(item.options._options);
+  console.log(
+    item.options.set({
+      iconImageHref: '/icons/active-marker.svg',
+    })
+  );
+
+  // setTimeout(() => {
+  //   item.options._options.iconImageHref = '/icons/active-marker.svg';
+  // }, 1000);
+  // marker.value[i].options._options.iconImageHref = '/icons/active-marker.svg';
+
   activePoint.value = point.id;
   store.a_setCoords(getCoords(point.coordinates));
 };

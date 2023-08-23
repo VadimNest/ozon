@@ -19,7 +19,7 @@ export const useMapStore = defineStore('map',
     actions: {
       a_setCoords(coordinates) {
         this.mapConfig.coordinates = coordinates;
-        this.mapConfig.zoom = 18;
+        // this.mapConfig.zoom = 18;
       }
     },
   })
