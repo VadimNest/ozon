@@ -1,25 +1,33 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 
-export const useMapStore = defineStore('map',
-  {
-    state: () => ({
-      mapConfig: {
-        zoom: 12,
-        coordinates: [45.043317, 41.96911],
-      }
-    }),
-
-    getters: {
-      g_getMapConfig(state) {
-        return state.mapConfig;
-      },
+export const useMapStore = defineStore('map', () => {
+  const state = ref({
+    mapConfig: {
+      zoom: 12,
+      coordinates: [45.043317, 41.96911],
     },
+    activePoint: 0,
+  });
 
-    actions: {
-      a_setCoords(coordinates) {
-        this.mapConfig.coordinates = coordinates;
-        // this.mapConfig.zoom = 18;
-      }
-    },
-  })
+  //actions
+  function a_setCoords(coordinates) {
+    state.value.mapConfig.coordinates = coordinates;
+    // this.mapConfig.zoom = 18;
+  };
+
+  function a_setActivePoint(id) {
+    state.value.activePoint = id;
+  }
+
+  // getters
+  const g_getMapConfig = computed(() => state.value.mapConfig);
+  const g_getActivePoint = computed(() => state.value.activePoint);
+
+  return {
+    state,
+    a_setCoords,
+    a_setActivePoint,
+    g_getMapConfig,
+    g_getActivePoint
+  }
+});

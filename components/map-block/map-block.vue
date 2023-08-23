@@ -4,8 +4,8 @@
       <YandexMap
         class="map-block__content"
         :settings="settings"
-        :zoom="mapConfig.zoom"
-        :coordinates="mapConfig.coordinates"
+        :zoom="store.g_getMapConfig.zoom"
+        :coordinates="store.g_getMapConfig.coordinates"
         :controls="[]"
       >
         <YandexClusterer :options="{ preset: 'islands#nightClusterIcons' }">
@@ -44,9 +44,11 @@ const props = defineProps({
   points: Array,
 });
 
-let mapConfig = computed(() => store.g_getMapConfig);
+let activePoint = computed(() => store.g_getActivePoint);
 
-const activePoint = ref(0);
+watch(activePoint, (newValue) => {
+  updateMarker(newValue);
+});
 
 const marker = ref(null);
 
@@ -62,10 +64,14 @@ const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
 const clickMarker = (point) => {
+  store.a_setActivePoint(point.id);
+  store.a_setCoords(getCoords(point.coordinates));
+};
+const updateMarker = (activeId) => {
   marker.value.forEach((item) => {
     if (
-      item.properties._data.markerId.includes(point.id) &&
-      activePoint.value != point.id
+      item.properties._data.markerId.includes(activeId) &&
+      activePoint != activeId
     ) {
       item.options.set({
         iconImageHref: '/icons/active-marker.svg',
@@ -77,9 +83,6 @@ const clickMarker = (point) => {
         iconImageHref: '/icons/marker.svg',
       });
   });
-
-  activePoint.value = point.id;
-  store.a_setCoords(getCoords(point.coordinates));
 };
 </script>
 

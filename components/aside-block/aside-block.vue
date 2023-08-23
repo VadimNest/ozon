@@ -5,7 +5,7 @@
         class="aside-block__item"
         v-for="point in points"
         :key="point.id"
-        @click="сlickMarker(point)"
+        @click="clickMarker(point)"
       >
         <h2 class="aside-block__title">Пункт Ozon</h2>
         <h3 class="aside-block__subtitle">
@@ -28,8 +28,9 @@ const props = defineProps({
 const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
-const сlickMarker = (point) => {
+const clickMarker = (point) => {
   store.a_setCoords(getCoords(point.coordinates));
+  store.a_setActivePoint(point.id);
 };
 </script>
 
