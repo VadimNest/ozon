@@ -61,12 +61,15 @@ const getCoords = (coords) => {
   return [coords.latitude, coords.longitude];
 };
 const clickMarker = (point) => {
-  let item = marker.value.find((item) =>
-    item.properties._data.markerId.includes(point.id)
-  );
-
-  item.options.set({
-    iconImageHref: '/icons/active-marker.svg',
+  marker.value.forEach((item) => {
+    if (item.properties._data.markerId.includes(point.id))
+      item.options.set({
+        iconImageHref: '/icons/active-marker.svg',
+      });
+    else
+      item.options.set({
+        iconImageHref: '/icons/marker.svg',
+      });
   });
 
   activePoint.value = point.id;
