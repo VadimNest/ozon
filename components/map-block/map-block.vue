@@ -69,19 +69,17 @@ const clickMarker = (point) => {
 };
 const updateMarker = (activeId) => {
   marker.value.forEach((item) => {
-    if (
-      item.properties._data.markerId.includes(activeId) &&
-      activePoint != activeId
-    ) {
+    if (item.properties._data.markerId.includes(activeId)) {
       item.options.set({
         iconImageHref: '/icons/active-marker.svg',
       });
-
       item.balloon.open();
-    } else
+    } else {
       item.options.set({
         iconImageHref: '/icons/marker.svg',
       });
+      item.balloon.close();
+    }
   });
 };
 </script>

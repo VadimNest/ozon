@@ -12,7 +12,7 @@ export const useMapStore = defineStore('map', () => {
   //actions
   function a_setCoords(coordinates) {
     state.value.mapConfig.coordinates = coordinates;
-    // this.mapConfig.zoom = 18;
+    state.value.mapConfig.zoom = 18;
   };
 
   function a_setActivePoint(id) {
